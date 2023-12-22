@@ -10,6 +10,35 @@
         <header>
             norah you are welcom
         </header>
+        <p> wather on riyadh city is :</p>
+        <h1>معلومات الطقس في الرياض</h1>
+
+        <div id="weather-info">
+            <p>جاري التحميل...</p>
+        </div>
+        <script>
+            // استبدال 'YOUR_API_KEY' بمفتاح API الخاص بك
+            const apiKey = '50db6214b571df9eaba64c6f28bd4b81';
+            const city = 'Riyadh';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    
+            // جلب بيانات الطقس من الخادم
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const weatherInfo = document.getElementById('weather-info');
+                    weatherInfo.innerHTML = `
+                        <p>درجة الحرارة: ${data.main.temp} درجة مئوية</p>
+                        <p>الوصف: ${data.weather[0].description}</p>
+                        <p>الرطوبة: ${data.main.humidity}%</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('حدث خطأ أثناء جلب بيانات الطقس:', error);
+                    const weatherInfo = document.getElementById('weather-info');
+                    weatherInfo.innerHTML = '<p>حدث خطأ أثناء جلب بيانات الطقس</p>';
+                });
+        </script>
         <h1>contact us </h1>
     </body>
 </html>
